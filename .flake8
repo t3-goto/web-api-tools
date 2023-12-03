@@ -14,7 +14,10 @@ exclude =
     build,
     dist,
     .dockervenv,
-    .pytest_cache
+    .pytest_cache,
+    coverage_reports
 max-complexity = 10
+# In test code, some lines may be longer. This is because we prioritize readability and clarity, such as explaining test cases or defining specific data structures. Therefore, it is common to ignore errors like E501 (line too long) in test code.
 per-file-ignores =
     */__init__.py: F401
+    tests/*: E501

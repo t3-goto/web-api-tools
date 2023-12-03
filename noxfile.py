@@ -8,7 +8,16 @@ def install_dependencies(session):
 @nox.session
 def tests(session):
     install_dependencies(session)
-    session.run("poetry", "run", "pytest", external=True)
+    session.run(
+        "poetry",
+        "run",
+        "pytest",
+        "--cov=.",
+        "--cov-report",
+        "html:coverage_reports",
+        "--cov-branch",
+        external=True,
+    )
 
 
 @nox.session

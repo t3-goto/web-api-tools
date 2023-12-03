@@ -1,9 +1,6 @@
 from datetime import date
 
-from ....domain.task.models.task_model import Task, TaskStatus
-from ....domain.task.repositories.abstract_task_repository import (
-    AbstractTaskRepository,
-)
+from ....domain.task import AbstractTaskRepository, Task, TaskStatus
 
 
 class InMemoryTaskRepository(AbstractTaskRepository):
@@ -65,3 +62,7 @@ class InMemoryTaskRepository(AbstractTaskRepository):
             if task.due_date >= due_date
             and task.task_status == TaskStatus.UNDONE
         ]
+
+    async def clear(self) -> None:
+        self.tasks = {}
+        self.next_id = 1

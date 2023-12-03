@@ -2,7 +2,7 @@ from datetime import date, timedelta
 from enum import IntEnum
 from typing import ClassVar, Optional
 
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, field_validator
 
 
 class TaskStatus(IntEnum):
@@ -18,7 +18,7 @@ class Task(BaseModel):
     postpone_count: int = 0
     POSTPONE_MAX_COUNT: ClassVar[int] = 3
 
-    @validator("name", "due_date")
+    @field_validator("name", "due_date")
     def validate_required(cls, v):
         if not v:
             raise ValueError("必須項目が設定されていません")
@@ -34,8 +34,8 @@ class Task(BaseModel):
     def done(self):
         self.task_status = TaskStatus.DONE
 
-    def rename(self, name: Optional[str] = None):
-        if name is None:
+    def rename(self, name: str):
+        if not name:
             raise ValueError("必須項目が設定されていません")
         self.name = name
 
