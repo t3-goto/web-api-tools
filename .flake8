@@ -1,0 +1,20 @@
+[flake8]
+ignore = E226,E302,E41,W503
+max-line-length = 79
+exclude =
+    .eggs,
+    .git,
+    .hg,
+    .mypy_cache,
+    .tox,
+    .nox,
+    .venv,
+    _build,
+    buck-out,
+    build,
+    dist,
+    .dockervenv,
+    .pytest_cache
+max-complexity = 10
+per-file-ignores =
+    */__init__.py: F401
